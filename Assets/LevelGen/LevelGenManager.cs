@@ -14,6 +14,7 @@ public class LevelGenManager : MonoBehaviour
     [SerializeField] float seed;
     [Range(0, 1)] [SerializeField] float caveMod;
     [Range(0, 10)] [SerializeField] int caveModSmoothness = 4;
+    [Range(0, 100)] [SerializeField] int fillPercent;
 
     [Header("Tiles")]
     [SerializeField] TileBase groundTile;
@@ -31,7 +32,6 @@ public class LevelGenManager : MonoBehaviour
 
     private void Generate()
     {
-        Debug.Log("-generated");
         BaseTileMap.ClearAllTiles();
         this.map = GenerateMap(this.width, this.height + groundHeight + hellHeight, true);
         this.map = TerrainGenerater(this.map);
@@ -63,6 +63,7 @@ public class LevelGenManager : MonoBehaviour
     public int[,] TerrainGenerater(int[,] map)
     {
         int perlinHeight;
+        System.Random rand = new System.Random(seed.GetHashCode());
         for (int i = 0; i < width; i++)
         {
             perlinHeight = hellHeight + groundHeight + Mathf.RoundToInt(Mathf.PerlinNoise(i / smoothness, seed) * height);
@@ -73,7 +74,8 @@ public class LevelGenManager : MonoBehaviour
             }
             for (j = hellHeight; j < perlinHeight; j++)
             {
-                int caveValue = Mathf.RoundToInt(Mathf.PerlinNoise((i * caveMod) + seed, (j * caveMod) + seed));
+                //int caveValue = Mathf.RoundToInt(Mathf.PerlinNoise((i * caveMod) + seed, (j * caveMod) + seed));
+                int caveValue = (rand.Next(0, 100) < fillPercent) ? 1 : 0;
                 map[i, j] = caveValue + 1;
             }
         }
@@ -81,43 +83,52 @@ public class LevelGenManager : MonoBehaviour
     }
     public int[,] SmoothOutcaves(int[,] map, int caveSmoothness)
     {
-        if(caveSmoothness == 0) return this.map;
+        if (caveSmoothness == 0) return this.map;
         else
-        for (int a = 0; a < caveSmoothness; a++)
-        {
-            for (int x = 0; x < map.GetLength(0); x++)
+            for (int a = 0; a < caveSmoothness; a++)
             {
-                for (int y = 0; y < map.GetLength(1); y++)
+                for (int x = 0; x < map.GetLength(0); x++)
                 {
-                    if (map[x, y] == 2)
+                    for (int y = 0; y < map.GetLength(1); y++)
                     {
-                        int erg = 0;
-                        if (x - 1 > 0 && x + 1 < map.GetLength(0) - 1){
-                            if (y - 1 > 0 && y + 1 < map.GetLength(1) - 1)
+                        if (map[x, y] != 0 && map[x, y] != 666)
+                        {
+                            int erg = GetMooreSurroundingTiles(map, x, y);
+                            if (x > 0 && x + 1 < map.GetUpperBound(0))
                             {
-                                for (int i = x - 1; i <= x + 1; i++)
+                                if (y > 0 && y + 1 < map.GetUpperBound(1))
                                 {
-                                    for (int j = y - 1; j <= y + 1; j++)
-                                    {
-                                        if(map[i,j] == 2)
-                                        {
-                                            erg += 1;
-                                        }
-                                    }
+                                    map[x, y] = erg > 4 ? 2 : 1;
                                 }
-                                map[x, y] = erg > 4 ? 1 : 2;
                             }
                         }
                     }
                 }
+                this.map = map;
             }
-            this.map = map;
-        }
         return map;
     }
 
+    private static int GetMooreSurroundingTiles(int[,] map, int x, int y, int erg = 0)
+    {
+        for (int i = x - 1; i <= x + 1; i++)
+        {
+            for (int j = y - 1; j <= y + 1; j++)
+            {
+                if (x > 0 && x < map.GetUpperBound(0) && y > 0 && y < map.GetUpperBound(1))
+                {
+                    if (x != i || y != j)
+                    {
+                        if(map[i,j] == 2){
+                            erg ++;
+                        }
+                    }
+                }
+            }
+        }
 
-
+        return erg;
+    }
 
     public void RenderBaseMap(int[,] map, Tilemap BaseMap, TileBase groundTiles)
     {

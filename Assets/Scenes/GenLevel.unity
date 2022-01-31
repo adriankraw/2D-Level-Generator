@@ -372,7 +372,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.16941082, g: 0.20258544, b: 0.254717, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -389,7 +389,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 100
+  orthographic size: 153.27423
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -413,7 +413,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857933298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 177.39, y: 99.7, z: -10}
+  m_LocalPosition: {x: 194.6, y: 103.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -492,14 +492,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5043787a3865604e94a1cc3e942245c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundHeight: 80
-  hellHeight: 20
-  width: 353
+  groundHeight: 30
+  hellHeight: 1
+  width: 100
   height: 30
   smoothness: 30
   seed: 100
-  caveMod: 0.081
-  caveModSmoothness: 2
+  caveMod: 0.615
+  caveModSmoothness: 1
+  fillPercent: 40
   groundTile: {fileID: 11400000, guid: 4ea6858585de3984480abf034e0b8cca, type: 2}
   stoneTile: {fileID: 11400000, guid: 89f66aacdf1f09b43b90d285907209f9, type: 2}
   hellTile: {fileID: 11400000, guid: 4b0080aa149c4c849a6af8715c985702, type: 2}
