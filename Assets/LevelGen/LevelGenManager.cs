@@ -12,14 +12,13 @@ public class LevelGenManager : MonoBehaviour
     [SerializeField] int width, height;
     [SerializeField] float smoothness;
     [SerializeField] float seed;
-    [Range(0, 1)] [SerializeField] float caveMod;
-    [Range(0, 10)] [SerializeField] int caveModSmoothness = 4;
-    [Range(0, 100)] [SerializeField] int fillPercent;
+    [SerializeField] TileGenerator[] TileGenerators;
 
     [Header("Tiles")]
     [SerializeField] TileBase groundTile;
     [SerializeField] TileBase stoneTile;
     [SerializeField] TileBase hellTile;
+    [SerializeField] TileBase EmptyTile;
     [SerializeField] Tilemap BaseTileMap;
     int[,] map;
     public int state = 0;
@@ -33,34 +32,50 @@ public class LevelGenManager : MonoBehaviour
     private void Generate()
     {
         BaseTileMap.ClearAllTiles();
-        this.map = GenerateMap(this.width, this.height + groundHeight + hellHeight, true);
-        this.map = TerrainGenerater(this.map);
-        this.map = SmoothOutcaves(this.map, caveModSmoothness);
-        RenderBaseMap(this.map, this.BaseTileMap, this.groundTile);
+        this.map = GenerateMap(this.width, this.height + groundHeight + hellHeight, false);
+        int[,] prefillmap = new int[,] { { } };
+        prefillmap = (int[,])this.map.Clone();
+        int[,] tmpMap = new int[,] { { } };
+        tmpMap = (int[,])this.map.Clone();
+        for (int i = 0; i < TileGenerators.Length; i++)
+        {
+            tmpMap = TerrainGenerater(prefillmap, TileGenerators[i]);
+            tmpMap = SmoothOutcaves(tmpMap, TileGenerators[i].smoothing, (int)TileGenerators[i].tile, (int)Tile_Enum.Ground);
+            for (int x = 0; x < tmpMap.GetLength(0); x++)
+            {
+                for (int y = 0; y < tmpMap.GetLength(1); y++)
+                {
+                    if (tmpMap[x, y] == (int)TileGenerators[i].tile && this.map[x, y] == (int)Tile_Enum.Ground)
+                    {
+                        this.map.SetValue(tmpMap.GetValue(x, y), x, y);
+                    }
+                }
+            }
+        }
+        RenderBaseMap(this.map, this.BaseTileMap);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
             Generate();
         }
     }
 
     private int[,] GenerateMap(int width, int height, bool empty)
     {
-        map = new int[width, height];
+        this.map = new int[width, height];
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                map[i, j] = empty ? 0 : 1;
+                this.map.SetValue(empty ? 0 : 1, i, j);
             }
         }
-        return map;
+        return this.map;
     }
-    public int[,] TerrainGenerater(int[,] map)
+    public int[,] TerrainGenerater(int[,] _map, TileGenerator tilegen)
     {
         int perlinHeight;
         System.Random rand = new System.Random(seed.GetHashCode());
@@ -70,58 +85,54 @@ public class LevelGenManager : MonoBehaviour
             int j;
             for (j = 0; j <= hellHeight - 1; j++)
             {
-                map[i, j] = 666;
+                _map[i, j] = 666;
             }
             for (j = hellHeight; j < perlinHeight; j++)
             {
-                //int caveValue = Mathf.RoundToInt(Mathf.PerlinNoise((i * caveMod) + seed, (j * caveMod) + seed));
-                int caveValue = (rand.Next(0, 100) < fillPercent) ? 1 : 0;
-                map[i, j] = caveValue + 1;
+                int caveValue = (rand.Next(0, 100) < tilegen.fillPercentage) ? (int)tilegen.tile : (int)Tile_Enum.Ground;
+                _map[i, j] = caveValue;
+            }
+            for(j = perlinHeight; j < _map.GetLength(1); j++)
+            {
+                _map.SetValue(0,i,j);
             }
         }
-        return map;
+        return _map;
     }
-    public int[,] SmoothOutcaves(int[,] map, int caveSmoothness)
+
+    public int[,] SmoothOutcaves(int[,] _map, int caveSmoothness, int TileX, int TileY)
     {
-        if (caveSmoothness == 0) return this.map;
+        if (caveSmoothness == 0) return _map;
         else
             for (int a = 0; a < caveSmoothness; a++)
             {
-                for (int x = 0; x < map.GetLength(0); x++)
+                for (int x = 0; x < _map.GetLength(0); x++)
                 {
-                    for (int y = 0; y < map.GetLength(1); y++)
+                    for (int y = 0; y < _map.GetLength(1); y++)
                     {
-                        if (map[x, y] != 0 && map[x, y] != 666)
+                        if (_map[x, y] != 0 && _map[x, y] != 666)
                         {
-                            int erg = GetMooreSurroundingTiles(map, x, y);
-                            if (x > 0 && x + 1 < map.GetUpperBound(0))
-                            {
-                                if (y > 0 && y + 1 < map.GetUpperBound(1))
-                                {
-                                    map[x, y] = erg > 4 ? 2 : 1;
-                                }
-                            }
+                            int erg = GetMooreSurroundingTiles(_map, x, y, TileX);
+                            _map[x, y] = erg > 4 ? TileX : TileY;
                         }
                     }
                 }
-                this.map = map;
             }
-        return map;
+        return _map;
     }
 
-    private static int GetMooreSurroundingTiles(int[,] map, int x, int y, int erg = 0)
+    private static int GetMooreSurroundingTiles(int[,] _map, int x, int y, int Tile)
     {
+        int erg = 0;
         for (int i = x - 1; i <= x + 1; i++)
         {
             for (int j = y - 1; j <= y + 1; j++)
             {
-                if (x > 0 && x < map.GetUpperBound(0) && y > 0 && y < map.GetUpperBound(1))
+                if (x > 1 && x < _map.GetLength(0) - 1 && y > 1 && y < _map.GetLength(1) - 1)
                 {
-                    if (x != i || y != j)
+                    if (_map[i, j] == Tile)
                     {
-                        if(map[i,j] == 2){
-                            erg ++;
-                        }
+                        erg++;
                     }
                 }
             }
@@ -130,26 +141,37 @@ public class LevelGenManager : MonoBehaviour
         return erg;
     }
 
-    public void RenderBaseMap(int[,] map, Tilemap BaseMap, TileBase groundTiles)
+    public void RenderBaseMap(int[,] map, Tilemap BaseMap)
     {
-        for (int i = 0; i < map.GetLength(0); i++)
+        Vector3Int erg = new Vector3Int(0, 0, 0);
+        for (int i = 0; i < this.map.GetLength(0); i++)
         {
-            for (int j = 0; j < map.GetLength(1); j++)
+            for (int j = 0; j < this.map.GetLength(1); j++)
             {
-                if (map[i, j] == 1)
+
+                if (this.map[i, j] == (int)Tile_Enum.Empty)
+                {
+                    BaseMap.SetTile(new Vector3Int(i, j, 0), EmptyTile);
+                    erg.x++;
+                }
+                if (this.map[i, j] == (int)Tile_Enum.Ground)
                 {
                     BaseMap.SetTile(new Vector3Int(i, j, 0), groundTile);
+                    erg.y++;
                 }
-                if (map[i, j] == 2)
+                if (this.map[i, j] == (int)Tile_Enum.Stone)
                 {
+                    // Debug.Log("stone");
                     BaseMap.SetTile(new Vector3Int(i, j, 0), stoneTile);
+                    erg.z++;
                 }
                 else
-                if (map[i, j] == 666)
+                if (this.map[i, j] == 666)
                 {
                     BaseMap.SetTile(new Vector3Int(i, j, 0), hellTile);
                 }
             }
         }
+        Debug.Log(erg);
     }
 }

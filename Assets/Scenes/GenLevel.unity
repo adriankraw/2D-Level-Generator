@@ -456,7 +456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017759728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -77, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1344934219}
@@ -492,18 +492,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5043787a3865604e94a1cc3e942245c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundHeight: 30
+  groundHeight: 80
   hellHeight: 1
-  width: 100
-  height: 30
+  width: 500
+  height: 40
   smoothness: 30
-  seed: 100
-  caveMod: 0.615
-  caveModSmoothness: 1
-  fillPercent: 40
+  seed: 100000
+  TileGenerators:
+  - tile: 0
+    cavemode: 1
+    smoothing: 1
+    fillPercentage: 31
+  - tile: 2
+    cavemode: 1
+    smoothing: 1
+    fillPercentage: 41
   groundTile: {fileID: 11400000, guid: 4ea6858585de3984480abf034e0b8cca, type: 2}
   stoneTile: {fileID: 11400000, guid: 89f66aacdf1f09b43b90d285907209f9, type: 2}
   hellTile: {fileID: 11400000, guid: 4b0080aa149c4c849a6af8715c985702, type: 2}
+  EmptyTile: {fileID: 11400000, guid: 467ff83f00bb8c4458c66de8403430ed, type: 2}
   BaseTileMap: {fileID: 1344934221}
   state: 0
 --- !u!4 &2049149222
@@ -514,7 +521,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2049149220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -77, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
