@@ -1,5 +1,3 @@
-# PseudoRaria
-
 ## Example
 ![Level_Generation](https://github.com/adriankraw/PseudoRaria/blob/main/Docu/Screenshots/Generated_Level.png)
 
