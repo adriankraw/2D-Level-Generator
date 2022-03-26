@@ -40,14 +40,17 @@ public class LevelGenManager : MonoBehaviour
         for (int i = 0; i < TileGenerators.Length; i++)
         {
             tmpMap = TerrainGenerater(prefillmap, TileGenerators[i]);
-            tmpMap = SmoothOutcaves(tmpMap, TileGenerators[i].smoothing, (int)TileGenerators[i].tile, (int)Tile_Enum.Ground);
+            tmpMap = SmoothOutcaves(tmpMap, TileGenerators[i].smoothing, (int)TileGenerators[i].tile, (int)Tile_Enum.Ground, TileGenerators[i].CaveCheck, TileGenerators[i].CaveBleed, TileGenerators[i].range);
             for (int x = 0; x < tmpMap.GetLength(0); x++)
             {
                 for (int y = 0; y < tmpMap.GetLength(1); y++)
                 {
-                    if (tmpMap[x, y] == (int)TileGenerators[i].tile && this.map[x, y] == (int)Tile_Enum.Ground)
+                    if ((tmpMap[x, y] == (int)TileGenerators[i].tile) && this.map[x, y] == (int)Tile_Enum.Ground)
                     {
                         this.map.SetValue(tmpMap.GetValue(x, y), x, y);
+                    }else if (tmpMap[x,y] == 999)
+                    {
+                        this.map.SetValue(0,x,y);
                     }
                 }
             }
@@ -78,11 +81,11 @@ public class LevelGenManager : MonoBehaviour
     public int[,] TerrainGenerater(int[,] _map, TileGenerator tilegen)
     {
         int perlinHeight;
+        int j;
         System.Random rand = new System.Random(seed.GetHashCode());
         for (int i = 0; i < width; i++)
         {
             perlinHeight = hellHeight + groundHeight + Mathf.RoundToInt(Mathf.PerlinNoise(i / smoothness, seed) * height);
-            int j;
             for (j = 0; j <= hellHeight - 1; j++)
             {
                 _map[i, j] = 666;
@@ -92,43 +95,64 @@ public class LevelGenManager : MonoBehaviour
                 int caveValue = (rand.Next(0, 100) < tilegen.fillPercentage) ? (int)tilegen.tile : (int)Tile_Enum.Ground;
                 _map[i, j] = caveValue;
             }
-            for(j = perlinHeight; j < _map.GetLength(1); j++)
+            for (j = perlinHeight; j < _map.GetLength(1); j++)
             {
-                _map.SetValue(0,i,j);
+                _map.SetValue(999, i, j);
             }
         }
         return _map;
     }
 
-    public int[,] SmoothOutcaves(int[,] _map, int caveSmoothness, int TileX, int TileY)
+    public int[,] SmoothOutcaves(int[,] _map, int caveSmoothness, int TileX, int TileY, int caveCheck, int CaveBleed, int range)
     {
+        int erg = 0;
         if (caveSmoothness == 0) return _map;
         else
+        {
             for (int a = 0; a < caveSmoothness; a++)
             {
                 for (int x = 0; x < _map.GetLength(0); x++)
                 {
                     for (int y = 0; y < _map.GetLength(1); y++)
                     {
-                        if (_map[x, y] != 0 && _map[x, y] != 666)
+                        if (_map[x, y] != 0 && _map[x, y] != 666 && _map[x, y] != 999)
                         {
-                            int erg = GetMooreSurroundingTiles(_map, x, y, TileX);
-                            _map[x, y] = erg > 4 ? TileX : TileY;
+                            erg = GetMooreSurroundingTiles(_map, x, y, TileX, range);
+                            if (erg > caveCheck)
+                            {
+                                _map.SetValue(TileX, x, y);
+                            }
+                            else
+                            {
+                                _map.SetValue(TileY, x, y);
+                            }
                         }
                     }
                 }
             }
+        }
+        for (int x = 0; x < _map.GetLength(0); x++)
+        {
+            for (int y = 0; y < _map.GetLength(1); y++)
+            {
+                erg = GetMooreSurroundingTiles(_map, x, y, TileX, range);
+                if (erg < CaveBleed)
+                {
+                    SmoothoutSurrounding(_map, x, y);
+                }
+            }
+        }
         return _map;
     }
 
-    private static int GetMooreSurroundingTiles(int[,] _map, int x, int y, int Tile)
+    private int GetMooreSurroundingTiles(int[,] _map, int x, int y, int Tile, int range)
     {
         int erg = 0;
-        for (int i = x - 1; i <= x + 1; i++)
+        for (int i = x - range; i <= x + range; i++)
         {
-            for (int j = y - 1; j <= y + 1; j++)
+            for (int j = y - range; j <= y + range; j++)
             {
-                if (x > 1 && x < _map.GetLength(0) - 1 && y > 1 && y < _map.GetLength(1) - 1)
+                if (x > range && x < _map.GetLength(0) - range && y > range && y < _map.GetLength(1) - range)
                 {
                     if (_map[i, j] == Tile)
                     {
@@ -140,10 +164,27 @@ public class LevelGenManager : MonoBehaviour
 
         return erg;
     }
+    private void SmoothoutSurrounding(int[,] _map, int x, int y)
+    {
+        int range = 1;
+        for (int i = x - range; i <= x + range; i++)
+        {
+            for (int j = y - range; j <= y + range; j++)
+            {
+                if (x > range && x < _map.GetLength(0) - range && y > range && y < _map.GetLength(1) - range)
+                {
+                    if (_map[i, j] != 1 && _map[i,j] != 999)
+                    {
+                        _map.SetValue(1, i, j);
+                    }
+                }
+            }
+        }
+    }
 
     public void RenderBaseMap(int[,] map, Tilemap BaseMap)
     {
-        Vector3Int erg = new Vector3Int(0, 0, 0);
+        // Vector3Int erg = new Vector3Int(0, 0, 0);
         for (int i = 0; i < this.map.GetLength(0); i++)
         {
             for (int j = 0; j < this.map.GetLength(1); j++)
@@ -152,26 +193,25 @@ public class LevelGenManager : MonoBehaviour
                 if (this.map[i, j] == (int)Tile_Enum.Empty)
                 {
                     BaseMap.SetTile(new Vector3Int(i, j, 0), EmptyTile);
-                    erg.x++;
-                }
+                    // erg.x++;
+                }else
                 if (this.map[i, j] == (int)Tile_Enum.Ground)
                 {
                     BaseMap.SetTile(new Vector3Int(i, j, 0), groundTile);
-                    erg.y++;
-                }
+                    // erg.y++;
+                }else
                 if (this.map[i, j] == (int)Tile_Enum.Stone)
                 {
                     // Debug.Log("stone");
                     BaseMap.SetTile(new Vector3Int(i, j, 0), stoneTile);
-                    erg.z++;
-                }
-                else
+                    // erg.z++;
+                }else
                 if (this.map[i, j] == 666)
                 {
                     BaseMap.SetTile(new Vector3Int(i, j, 0), hellTile);
                 }
             }
         }
-        Debug.Log(erg);
+        // Debug.Log(erg);
     }
 }

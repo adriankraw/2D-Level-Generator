@@ -9,13 +9,18 @@ public enum Tile_Enum
 }
 
 [Serializable]
-public struct TileGenerator{
+public struct TileGenerator
+{
     public Tile_Enum tile;
-    [Range(0, 1)]
-    public float cavemode;
+    [Range(0, 100)]
+    public int fillPercentage;
+    [Range(1, 3)]
+    public int range;
     [Range(0, 10)]
     public int smoothing;
+    [Range(0, 26)]
+    public int CaveCheck;
+    [Range(0, 10)]
+    public int CaveBleed;
 
-    [Range(0,100)]
-    public int fillPercentage;
 }

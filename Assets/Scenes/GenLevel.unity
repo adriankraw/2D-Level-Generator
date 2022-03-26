@@ -140,7 +140,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1344934219
 Transform:
@@ -434,7 +434,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!156049354 &2017759729
 Grid:
@@ -456,7 +456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017759728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -77, y: 0, z: 0}
+  m_LocalPosition: {x: -77, y: -246, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1344934219}
@@ -492,21 +492,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5043787a3865604e94a1cc3e942245c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundHeight: 80
+  groundHeight: 200
   hellHeight: 1
-  width: 500
-  height: 40
-  smoothness: 30
+  width: 800
+  height: 80
+  smoothness: 70
   seed: 100000
   TileGenerators:
   - tile: 0
-    cavemode: 1
+    fillPercentage: 33
+    range: 2
     smoothing: 1
-    fillPercentage: 31
+    CaveCheck: 13
+    CaveBleed: 5
   - tile: 2
-    cavemode: 1
+    fillPercentage: 52
+    range: 1
     smoothing: 1
-    fillPercentage: 41
+    CaveCheck: 4
+    CaveBleed: 0
   groundTile: {fileID: 11400000, guid: 4ea6858585de3984480abf034e0b8cca, type: 2}
   stoneTile: {fileID: 11400000, guid: 89f66aacdf1f09b43b90d285907209f9, type: 2}
   hellTile: {fileID: 11400000, guid: 4b0080aa149c4c849a6af8715c985702, type: 2}
@@ -521,7 +525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2049149220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -77, y: 0, z: 0}
+  m_LocalPosition: {x: -77, y: -50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
