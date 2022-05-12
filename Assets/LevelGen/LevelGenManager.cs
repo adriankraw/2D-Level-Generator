@@ -58,14 +58,6 @@ public class LevelGenManager : MonoBehaviour
         RenderBaseMap(this.map, this.BaseTileMap);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Generate();
-        }
-    }
-
     private int[,] GenerateMap(int width, int height, bool empty)
     {
         this.map = new int[width, height];
