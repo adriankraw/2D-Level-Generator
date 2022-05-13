@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class characterController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class characterController : MonoBehaviour
     public bool isGround;
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] BoxCollider2D _collider2D;
+    [SerializeField] inventar inventar;
+    [SerializeField] inventarScreen invScreen;
     [SerializeField] float walkSpeed = 1;
     [SerializeField] float fric = 5;
     [SerializeField] float jumpStrg = 20F;
@@ -18,6 +21,8 @@ public class characterController : MonoBehaviour
     [SerializeField] float gravity = 0.6F;
     [SerializeField] LayerMask layermask;
     [SerializeField] Transform boden;
+
+    [SerializeField] TileBases[] tiles;
 
     public ContactFilter2D contactFilter2D;
 
@@ -27,6 +32,7 @@ public class characterController : MonoBehaviour
     private void Awake() {
         mainInput = new MainChar();
         mainCam = Camera.main;
+        inventar.InitInventar(10, invScreen);
     }
     private void OnEnable() {
         mainInput.Enable();
@@ -41,6 +47,15 @@ public class characterController : MonoBehaviour
         if(mainInput.Game.Interact.triggered)
         {
             Vector3Int a = Map.instance.tilemap.WorldToCell(boden.position);
+            TileBase b = Map.instance.tilemap.GetTile(a);
+            for(int i = 0; i < tiles.Length; i++)
+            {
+                if(tiles[i].tilebase == b)
+                {
+                    
+                    inventar.AddItem(tiles[i]);
+                }
+            }
             Map.instance.tilemap.SetTile( a, null);
         }
 

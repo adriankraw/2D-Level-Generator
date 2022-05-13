@@ -15,10 +15,10 @@ public class LevelGenManager : MonoBehaviour
     [SerializeField] TileGenerator[] TileGenerators;
 
     [Header("Tiles")]
-    [SerializeField] TileBase groundTile;
-    [SerializeField] TileBase stoneTile;
-    [SerializeField] TileBase hellTile;
-    [SerializeField] TileBase EmptyTile;
+    [SerializeField] TileBases groundTile;
+    [SerializeField] TileBases stoneTile;
+    [SerializeField] TileBases hellTile;
+    [SerializeField] TileBases EmptyTile;
     [SerializeField] Tilemap BaseTileMap;
     int[,] map;
     public int state = 0;
@@ -184,23 +184,23 @@ public class LevelGenManager : MonoBehaviour
 
                 if (this.map[i, j] == (int)Tile_Enum.Empty)
                 {
-                    BaseMap.SetTile(new Vector3Int(i, j, 0), EmptyTile);
+                    BaseMap.SetTile(new Vector3Int(i, j, 0), EmptyTile.tilebase);
                     // erg.x++;
                 }else
                 if (this.map[i, j] == (int)Tile_Enum.Ground)
                 {
-                    BaseMap.SetTile(new Vector3Int(i, j, 0), groundTile);
+                    BaseMap.SetTile(new Vector3Int(i, j, 0), groundTile.tilebase);
                     // erg.y++;
                 }else
                 if (this.map[i, j] == (int)Tile_Enum.Stone)
                 {
                     // Debug.Log("stone");
-                    BaseMap.SetTile(new Vector3Int(i, j, 0), stoneTile);
+                    BaseMap.SetTile(new Vector3Int(i, j, 0), stoneTile.tilebase);
                     // erg.z++;
                 }else
                 if (this.map[i, j] == 666)
                 {
-                    BaseMap.SetTile(new Vector3Int(i, j, 0), hellTile);
+                    BaseMap.SetTile(new Vector3Int(i, j, 0), hellTile.tilebase);
                 }
             }
         }

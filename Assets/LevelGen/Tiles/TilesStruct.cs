@@ -6,6 +6,7 @@ public enum Tile_Enum
     Empty = 0,
     Ground = 1,
     Stone = 2,
+    Hell = 666,
 }
 
 [Serializable]
