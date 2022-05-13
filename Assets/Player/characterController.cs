@@ -16,6 +16,8 @@ public class characterController : MonoBehaviour
     [SerializeField] float jumpStrg = 20F;
     [SerializeField] float maxspeed;
     [SerializeField] float gravity = 0.6F;
+    [SerializeField] LayerMask layermask;
+    [SerializeField] Transform boden;
 
     public ContactFilter2D contactFilter2D;
 
@@ -35,6 +37,18 @@ public class characterController : MonoBehaviour
 
     void Update()
     {
+        //Buttons
+        if(mainInput.Game.Interact.triggered)
+        {
+            Vector3Int a = Map.instance.tilemap.WorldToCell(boden.position);
+            Map.instance.tilemap.SetTile( a, null);
+        }
+
+        //Debug.Log(Map.instance.tilemap.WorldToCell(Camera.main.ScreenToWorldPoint( mainInput.Game.MousePosition.ReadValue<Vector2>())));
+
+
+        //Movement
+
         mainCam.transform.position = new Vector3(this.transform.position.x,this.transform.position.y,0);
 
         move.x += mainInput.Game.Move.ReadValue<Vector2>().x;
@@ -44,6 +58,7 @@ public class characterController : MonoBehaviour
         }
         float space = mainInput.Game.Jump.ReadValue<float>();
 
+        //GroundCheck
         hit = Physics2D.BoxCast(transform.position,Vector2.one * 0.8F,0,transform.TransformDirection(Vector3.down),0.1F);
         if(hit)
         {
@@ -51,11 +66,12 @@ public class characterController : MonoBehaviour
         }else{
             isGround = false;
         }
-        hit = Physics2D.BoxCast(transform.position,Vector2.one * 0.4F,0,transform.TransformDirection(Vector3.left),0.5F);
+
+        hit = Physics2D.BoxCast(transform.position,new Vector2(0.01F, 0.4F),0,transform.TransformDirection(Vector3.left),0.5F);
         if(hit){
             if(move.x < 0) move.x = 0;
         }
-        hit = Physics2D.BoxCast(transform.position,Vector2.one * 0.4F,0,transform.TransformDirection(Vector3.right),0.5F);
+        hit = Physics2D.BoxCast(transform.position,new Vector2(0.01F, 0.4F),0,transform.TransformDirection(Vector3.right),0.5F);
         if(hit){
             if(move.x > 0) move.x = 0;
         }
@@ -88,8 +104,6 @@ public class characterController : MonoBehaviour
         }else if(move.x < -maxspeed){
             move.x = -maxspeed;
         }
-    }
-    private void FixedUpdate() {
-        transform.Translate(move * walkSpeed * Time.fixedDeltaTime);
+        transform.Translate(move * walkSpeed * Time.deltaTime);
     }
 }
