@@ -855,8 +855,8 @@ MonoBehaviour:
   inventar:
     invScreen: {fileID: 0}
   invScreen: {fileID: 826945442}
-  walkSpeed: 2
-  fric: 5
+  walkSpeed: 1.5
+  fric: 10
   jumpStrg: 15
   maxspeed: 8
   gravity: 32
@@ -2628,7 +2628,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 32.991608
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
