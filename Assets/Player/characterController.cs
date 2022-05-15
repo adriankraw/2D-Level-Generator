@@ -44,7 +44,7 @@ public class characterController : MonoBehaviour
     void Update()
     {
         //Buttons
-        if(mainInput.Game.Interact.triggered)
+        if(mainInput.Game.Interact.IsPressed())
         {
             Vector3Int a = Map.instance.tilemap.WorldToCell(boden.position);
             TileBase b = Map.instance.tilemap.GetTile(a);
