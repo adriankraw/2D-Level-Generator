@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Hell
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 433935700744663499e3d5f2df672697, type: 3}
-  tilebase: {fileID: 11400000}
+  tilebase: {fileID: 11400000, guid: 4b0080aa149c4c849a6af8715c985702, type: 2}
   TilesStruct: 666
