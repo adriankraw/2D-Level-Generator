@@ -45,12 +45,17 @@ public class LevelGenManager : MonoBehaviour
             {
                 for (int y = 0; y < tmpMap.GetLength(1); y++)
                 {
-                    if ((tmpMap[x, y] == (int)TileGenerators[i].tile) && this.map[x, y] == (int)Tile_Enum.Ground)
+                    if(y == 0)
                     {
-                        this.map.SetValue(tmpMap.GetValue(x, y), x, y);
-                    }else if (tmpMap[x,y] == 999)
-                    {
-                        this.map.SetValue(0,x,y);
+                        this.map.SetValue(tmpMap.GetValue(x,y),x,y);
+                    }else{
+                        if ((tmpMap[x, y] == (int)TileGenerators[i].tile) && this.map[x, y] == (int)Tile_Enum.Ground)
+                        {
+                            this.map.SetValue(tmpMap.GetValue(x, y), x, y);
+                        }else if (tmpMap[x,y] == 999)
+                        {
+                            this.map.SetValue(0,x,y);
+                        }
                     }
                 }
             }
@@ -75,12 +80,18 @@ public class LevelGenManager : MonoBehaviour
         int perlinHeight;
         int j;
         System.Random rand = new System.Random(seed.GetHashCode());
+
         for (int i = 0; i < width; i++)
         {
             perlinHeight = hellHeight + groundHeight + Mathf.RoundToInt(Mathf.PerlinNoise(i / smoothness, seed) * height);
             for (j = 0; j <= hellHeight - 1; j++)
             {
-                _map[i, j] = 666;
+                if(j == 0)
+                {
+                    _map.SetValue(perlinHeight,i,j);
+                }else{
+                    _map[i, j] = 666;
+                }
             }
             for (j = hellHeight; j < perlinHeight; j++)
             {
@@ -105,7 +116,7 @@ public class LevelGenManager : MonoBehaviour
             {
                 for (int x = 0; x < _map.GetLength(0); x++)
                 {
-                    for (int y = 0; y < _map.GetLength(1); y++)
+                    for (int y = 1; y < _map.GetLength(1); y++)
                     {
                         if (_map[x, y] != 0 && _map[x, y] != 666 && _map[x, y] != 999)
                         {
@@ -125,7 +136,7 @@ public class LevelGenManager : MonoBehaviour
         }
         for (int x = 0; x < _map.GetLength(0); x++)
         {
-            for (int y = 0; y < _map.GetLength(1); y++)
+            for (int y = 1; y < _map.GetLength(1); y++)
             {
                 erg = GetMooreSurroundingTiles(_map, x, y, TileX, range);
                 if (erg < CaveBleed)
@@ -179,7 +190,7 @@ public class LevelGenManager : MonoBehaviour
         // Vector3Int erg = new Vector3Int(0, 0, 0);
         for (int i = 0; i < this.map.GetLength(0); i++)
         {
-            for (int j = 0; j < this.map.GetLength(1); j++)
+            for (int j = 1; j < this.map.GetLength(1); j++)
             {
 
                 if (this.map[i, j] == (int)Tile_Enum.Empty)
