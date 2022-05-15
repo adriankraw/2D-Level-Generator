@@ -856,7 +856,7 @@ MonoBehaviour:
     invScreen: {fileID: 0}
   invScreen: {fileID: 826945442}
   walkSpeed: 1.5
-  fric: 10
+  fric: 9
   jumpStrg: 15
   maxspeed: 8
   gravity: 32
