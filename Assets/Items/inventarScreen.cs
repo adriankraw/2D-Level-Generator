@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class inventarScreen : MonoBehaviour
 {
-    public List<SpriteRenderer> Images = new List<SpriteRenderer>();
+    public List<Image> Images = new List<Image>();
     public void ReadImages(){
         foreach(Transform trans in GetComponentInChildren<Transform>())
         {
-            Images.Add(trans.GetComponent<SpriteRenderer>());
+            Images.Add(trans.GetComponent<Image>());
         }
     }
 }

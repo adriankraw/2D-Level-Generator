@@ -8,13 +8,18 @@ public class MonsterPool : MonoBehaviour
     private int spawned;
     public bool spawnable = true;
 
-    public bool CheckSpawn(){
-        if(spawned + 1 < monsters.Length)
-        {
-            spawned++;
-            return true;
-        }else{
-            return false;
+    private void Awake() {
+        foreach(GameObject monster in monsters){
+            monster.SetActive(false);
         }
+    }
+    public bool CheckSpawn(){
+        // if(spawned + 1 < monsters.Length)
+        // {
+        //     spawned++;
+            return true;
+        // }else{
+        //     return false;
+        // }
     }
 }

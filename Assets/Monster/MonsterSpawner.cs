@@ -27,6 +27,15 @@ public class MonsterSpawner : MonoBehaviour
             if(monsterPool.CheckSpawn() && spawining)
             {
                 //spawn
+                for (int i = 0; i < monsterPool.monsters.Length; i++)
+                {
+                    if(!monsterPool.monsters[i].activeSelf)
+                    {
+                        monsterPool.monsters[i].SetActive(true);
+                        monsterPool.monsters[i].transform.position = this.transform.position;
+                        break;
+                    }
+                }
             }
             yield return RoundsLengthWaiting;
         }

@@ -14,13 +14,15 @@ public class characterController : MonoBehaviour
     [SerializeField] BoxCollider2D _collider2D;
     [SerializeField] inventar inventar;
     [SerializeField] inventarScreen invScreen;
+    [SerializeField] PlayerBullets playerBullets;
     [SerializeField] float walkSpeed = 1;
     [SerializeField] float fric = 5;
     [SerializeField] float jumpStrg = 20F;
     [SerializeField] float maxspeed;
     [SerializeField] float gravity = 0.6F;
     [SerializeField] LayerMask layermask;
-    [SerializeField] Transform boden;
+
+    [SerializeField] Transform TileSelection;
 
     [SerializeField] TileBases[] tiles;
 
@@ -28,97 +30,147 @@ public class characterController : MonoBehaviour
 
     private RaycastHit2D hit;
     Vector2 move = Vector2.zero;
+    float space = 0f;
+    private MovementColliders movementColliders;
+    private Vector3 bulletPosition;
+    private Vector3 bulletangle;
+    private bool mouseWasPressed;
 
-    private void Awake() {
+    private void Awake()
+    {
         mainInput = new MainChar();
         mainCam = Camera.main;
         inventar.InitInventar(10, invScreen);
+        movementColliders = new MovementColliders();
     }
-    private void OnEnable() {
+    private void OnEnable()
+    {
         mainInput.Enable();
     }
-    private void OnDisable() {
+    private void OnDisable()
+    {
         mainInput.Disable();
     }
 
     void Update()
     {
-        //Buttons
-        if(mainInput.Game.Interact.IsPressed())
+        #region Buttons
+        if (mainInput.Game.Interact.IsPressed())
         {
-            Vector3Int a = Map.instance.tilemap.WorldToCell(boden.position);
-            TileBase b = Map.instance.tilemap.GetTile(a);
-            for(int i = 0; i < tiles.Length; i++)
+            Vector3Int selectedTilePosition = Map.instance.tilemap.WorldToCell(TileSelection.position);
+            TileBase b = Map.instance.tilemap.GetTile(selectedTilePosition);
+            for (int i = 0; i < tiles.Length; i++)
             {
-                if(tiles[i].tilebase == b)
+                if (tiles[i].tilebase != null && tiles[i].tilebase == b)
                 {
-                    
                     inventar.AddItem(tiles[i]);
                 }
             }
-            Map.instance.tilemap.SetTile( a, null);
+            Map.instance.tilemap.SetTile(selectedTilePosition, null);
+
+
+
         }
+        if (mainInput.Game.MouseClick.IsPressed())
+        {
+            if(mouseWasPressed == false)
+            {
+                mouseWasPressed = true;
+                StartCoroutine(CheckMouseClick());
+            }
+        }else{
+            if(mouseWasPressed == true)
+            {
+                mouseWasPressed = false;
+            }
+        }
+        #endregion
 
-        //Debug.Log(Map.instance.tilemap.WorldToCell(Camera.main.ScreenToWorldPoint( mainInput.Game.MousePosition.ReadValue<Vector2>())));
-
-
-        //Movement
-
-        mainCam.transform.position = new Vector3(this.transform.position.x,this.transform.position.y,0);
+        CameraController();
 
         move.x += mainInput.Game.Move.ReadValue<Vector2>().x;
-        if(mainInput.Game.Move.ReadValue<Vector2>().y < 0)
+        if (mainInput.Game.Move.ReadValue<Vector2>().y < 0)
         {
             move.y += mainInput.Game.Move.ReadValue<Vector2>().y * 0.05F;
         }
-        float space = mainInput.Game.Jump.ReadValue<float>();
+        space = mainInput.Game.Jump.ReadValue<float>();
 
-        //GroundCheck
-        hit = Physics2D.BoxCast(transform.position,Vector2.one * 0.8F,0,transform.TransformDirection(Vector3.down),0.1F);
-        if(hit)
+        #region Colliders
+        if (movementColliders.CheckSides(move, transform,layermask))
         {
-            isGround = true;
-        }else{
-            isGround = false;
+            move.x = 0;
         }
 
-        hit = Physics2D.BoxCast(transform.position,new Vector2(0.01F, 0.4F),0,transform.TransformDirection(Vector3.left),0.5F);
-        if(hit){
-            if(move.x < 0) move.x = 0;
-        }
-        hit = Physics2D.BoxCast(transform.position,new Vector2(0.01F, 0.4F),0,transform.TransformDirection(Vector3.right),0.5F);
-        if(hit){
-            if(move.x > 0) move.x = 0;
-        }
-        if(isGround)
+        isGround = movementColliders.GroundCheck(transform,layermask);
+        if (isGround)
         {
             move.y = space * jumpStrg;
-        }else{
-            // if(move.y > -3F)
-            move.y -= gravity * Time.deltaTime;
         }
-        if(move.x > 0)
+        else
         {
-            if(move.x -(0.1F * fric) < 0)
+            if (movementColliders.HeadCheck(transform,layermask))
+            {
+                move.y = 0 - gravity * Time.deltaTime;
+            }
+            else
+            {
+                move.y -= gravity * Time.deltaTime;
+            }
+        }
+        #endregion
+
+
+
+        if (move.x > 0)
+        {
+            if (move.x - (0.1F * fric) < 0)
             {
                 move.x = 0;
-            }else{
+            }
+            else
+            {
                 move.x -= (0.1F * fric);
             }
-        }else{
-            if(move.x + (0.1F * fric) > 0)
+        }
+        else
+        {
+            if (move.x + (0.1F * fric) > 0)
             {
                 move.x = 0;
-            }else{
+            }
+            else
+            {
                 move.x += (0.1F * fric);
             }
         }
-        if(move.x > maxspeed)
+        if (move.x > maxspeed)
         {
             move.x = maxspeed;
-        }else if(move.x < -maxspeed){
+        }
+        else if (move.x < -maxspeed)
+        {
             move.x = -maxspeed;
         }
         transform.Translate(move * walkSpeed * Time.deltaTime);
+    }
+    IEnumerator CheckMouseClick()
+    {
+        while (mainInput.Game.MouseClick.IsPressed())
+        {
+            bulletangle.x = Camera.main.ScreenToWorldPoint(mainInput.Game.MousePosition.ReadValue<Vector2>(), Camera.MonoOrStereoscopicEye.Mono).x - this.transform.position.x;
+            bulletangle.y = Camera.main.ScreenToWorldPoint(mainInput.Game.MousePosition.ReadValue<Vector2>(), Camera.MonoOrStereoscopicEye.Mono).y  - this.transform.position.y;
+            
+            bulletPosition.x = this.transform.position.x + bulletangle.normalized.x;
+            bulletPosition.y = this.transform.position.y + bulletangle.normalized.y;
+            bulletPosition.z = 0;
+
+            playerBullets.ShootBullet(bulletPosition, bulletangle.normalized * 10);
+            yield return new WaitForSecondsRealtime(0.5F);
+        }
+    }
+
+    private void CameraController()
+    {
+        mainCam.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
     }
 }
