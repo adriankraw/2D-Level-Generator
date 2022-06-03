@@ -26,6 +26,8 @@ public class characterController : MonoBehaviour
 
     [SerializeField] TileBases[] tiles;
 
+    [SerializeField] LineRenderer lineRenderer;
+
     public ContactFilter2D contactFilter2D;
 
     private RaycastHit2D hit;
@@ -36,12 +38,15 @@ public class characterController : MonoBehaviour
     private Vector3 bulletangle;
     private bool mouseWasPressed;
 
+    private bool weaponselected = false;
+
     private void Awake()
     {
         mainInput = new MainChar();
         mainCam = Camera.main;
         inventar.InitInventar(10, invScreen);
         movementColliders = new MovementColliders();
+        lineRenderer.enabled = false;
     }
     private void OnEnable()
     {
@@ -54,22 +59,41 @@ public class characterController : MonoBehaviour
 
     void Update()
     {
-        #region Buttons
-        if (mainInput.Game.Interact.IsPressed())
+        Vector3 mousePosi = Camera.main.ScreenToWorldPoint(mainInput.Game.MousePosition.ReadValue<Vector2>());
+        if (Vector3.Distance(this.transform.position, mousePosi) < 4)
         {
-            Vector3Int selectedTilePosition = Map.instance.tilemap.WorldToCell(TileSelection.position);
-            TileBase b = Map.instance.tilemap.GetTile(selectedTilePosition);
-            for (int i = 0; i < tiles.Length; i++)
+            if (!lineRenderer.enabled) { lineRenderer.enabled = true; }
+
+            Vector3Int Cell = Map.instance.tilemap.layoutGrid.WorldToCell(mousePosi);
+            Vector3 _cell = Map.instance.tilemap.GetCellCenterWorld(Cell);
+
+            lineRenderer.SetPosition(0, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F,0));
+            lineRenderer.SetPosition(1, new Vector3(_cell.x + 0.5F, _cell.y + 0.5F,0));
+            lineRenderer.SetPosition(2, new Vector3(_cell.x + 0.5F, _cell.y - 0.5F,0));
+            lineRenderer.SetPosition(3, new Vector3(_cell.x - 0.5F, _cell.y - 0.5F,0));
+            lineRenderer.SetPosition(4, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F,0));
+        }
+        else 
+        {
+            if (lineRenderer.enabled) { lineRenderer.enabled = false; }
+        }
+
+#region Buttons
+        if (mainInput.Game.Interact.IsPressed() || (mainInput.Game.MouseClick.IsPressed() && weaponselected ))
+        {
+            if (Vector3.Distance(this.transform.position, mousePosi) < 4)
             {
-                if (tiles[i].tilebase != null && tiles[i].tilebase == b)
+                Vector3Int selectedTilePosition = Map.instance.tilemap.WorldToCell(mousePosi);
+                TileBase b = Map.instance.tilemap.GetTile(selectedTilePosition);
+                for (int i = 0; i < tiles.Length; i++)
                 {
-                    inventar.AddItem(tiles[i]);
+                    if (tiles[i].tilebase != null && tiles[i].tilebase == b)
+                    {
+                        inventar.AddItem(tiles[i]);
+                    }
                 }
+                Map.instance.tilemap.SetTile(selectedTilePosition, null);
             }
-            Map.instance.tilemap.SetTile(selectedTilePosition, null);
-
-
-
         }
         if (mainInput.Game.MouseClick.IsPressed())
         {
@@ -84,7 +108,7 @@ public class characterController : MonoBehaviour
                 mouseWasPressed = false;
             }
         }
-        #endregion
+#endregion
 
         CameraController();
 
