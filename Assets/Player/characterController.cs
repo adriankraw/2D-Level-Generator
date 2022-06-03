@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -67,19 +66,22 @@ public class characterController : MonoBehaviour
             Vector3Int Cell = Map.instance.tilemap.layoutGrid.WorldToCell(mousePosi);
             Vector3 _cell = Map.instance.tilemap.GetCellCenterWorld(Cell);
 
-            lineRenderer.SetPosition(0, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F,0));
-            lineRenderer.SetPosition(1, new Vector3(_cell.x + 0.5F, _cell.y + 0.5F,0));
-            lineRenderer.SetPosition(2, new Vector3(_cell.x + 0.5F, _cell.y - 0.5F,0));
-            lineRenderer.SetPosition(3, new Vector3(_cell.x - 0.5F, _cell.y - 0.5F,0));
-            lineRenderer.SetPosition(4, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F,0));
+            lineRenderer.SetPosition(0, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F, 0));
+            lineRenderer.SetPosition(1, new Vector3(_cell.x + 0.5F, _cell.y + 0.5F, 0));
+            lineRenderer.SetPosition(2, new Vector3(_cell.x + 0.5F, _cell.y - 0.5F, 0));
+            lineRenderer.SetPosition(3, new Vector3(_cell.x - 0.5F, _cell.y - 0.5F, 0));
+            lineRenderer.SetPosition(4, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F, 0));
+            lineRenderer.SetPosition(5, new Vector3(_cell.x + 0.5F, _cell.y + 0.5F, 0));
         }
-        else 
+        else
         {
             if (lineRenderer.enabled) { lineRenderer.enabled = false; }
         }
 
-#region Buttons
-        if (mainInput.Game.Interact.IsPressed() || (mainInput.Game.MouseClick.IsPressed() && weaponselected ))
+        #region Buttons
+
+        InventoryButtons();
+        if (mainInput.Game.Interact.IsPressed() || (mainInput.Game.MouseClick.IsPressed() && weaponselected))
         {
             if (Vector3.Distance(this.transform.position, mousePosi) < 4)
             {
@@ -97,18 +99,20 @@ public class characterController : MonoBehaviour
         }
         if (mainInput.Game.MouseClick.IsPressed())
         {
-            if(mouseWasPressed == false)
+            if (mouseWasPressed == false)
             {
                 mouseWasPressed = true;
                 StartCoroutine(CheckMouseClick());
             }
-        }else{
-            if(mouseWasPressed == true)
+        }
+        else
+        {
+            if (mouseWasPressed == true)
             {
                 mouseWasPressed = false;
             }
         }
-#endregion
+        #endregion
 
         CameraController();
 
@@ -120,19 +124,19 @@ public class characterController : MonoBehaviour
         space = mainInput.Game.Jump.ReadValue<float>();
 
         #region Colliders
-        if (movementColliders.CheckSides(move, transform,layermask))
+        if (movementColliders.CheckSides(move, transform, layermask))
         {
             move.x = 0;
         }
 
-        isGround = movementColliders.GroundCheck(transform,layermask);
+        isGround = movementColliders.GroundCheck(transform, layermask);
         if (isGround)
         {
             move.y = space * jumpStrg;
         }
         else
         {
-            if (movementColliders.HeadCheck(transform,layermask))
+            if (movementColliders.HeadCheck(transform, layermask))
             {
                 move.y = 0 - gravity * Time.deltaTime;
             }
@@ -182,8 +186,8 @@ public class characterController : MonoBehaviour
         while (mainInput.Game.MouseClick.IsPressed())
         {
             bulletangle.x = Camera.main.ScreenToWorldPoint(mainInput.Game.MousePosition.ReadValue<Vector2>(), Camera.MonoOrStereoscopicEye.Mono).x - this.transform.position.x;
-            bulletangle.y = Camera.main.ScreenToWorldPoint(mainInput.Game.MousePosition.ReadValue<Vector2>(), Camera.MonoOrStereoscopicEye.Mono).y  - this.transform.position.y;
-            
+            bulletangle.y = Camera.main.ScreenToWorldPoint(mainInput.Game.MousePosition.ReadValue<Vector2>(), Camera.MonoOrStereoscopicEye.Mono).y - this.transform.position.y;
+
             bulletPosition.x = this.transform.position.x + bulletangle.normalized.x;
             bulletPosition.y = this.transform.position.y + bulletangle.normalized.y;
             bulletPosition.z = 0;
@@ -196,5 +200,49 @@ public class characterController : MonoBehaviour
     private void CameraController()
     {
         mainCam.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
+    }
+
+    private void InventoryButtons()
+    {
+        if (mainInput.Screen.Screen_Inv_1.IsPressed())
+        {
+            inventar.SetSelectedItem(0);
+        }
+        if (mainInput.Screen.Screen_Inv_2.IsPressed())
+        {
+            inventar.SetSelectedItem(1);
+        }
+        if (mainInput.Screen.Screen_Inv_3.IsPressed())
+        {
+            inventar.SetSelectedItem(2);
+        }
+        if (mainInput.Screen.Screen_Inv_4.IsPressed())
+        {
+            inventar.SetSelectedItem(3);
+        }
+        if (mainInput.Screen.Screen_Inv_5.IsPressed())
+        {
+            inventar.SetSelectedItem(4);
+        }
+        if (mainInput.Screen.Screen_Inv_6.IsPressed())
+        {
+            inventar.SetSelectedItem(5);
+        }
+        if (mainInput.Screen.Screen_Inv_7.IsPressed())
+        {
+            inventar.SetSelectedItem(6);
+        }
+        if (mainInput.Screen.Screen_Inv_8.IsPressed())
+        {
+            inventar.SetSelectedItem(7);
+        }
+        if (mainInput.Screen.Screen_Inv_9.IsPressed())
+        {
+            inventar.SetSelectedItem(8);
+        }
+        if (mainInput.Screen.Screen_Inv_0.IsPressed())
+        {
+            inventar.SetSelectedItem(9);
+        }
     }
 }

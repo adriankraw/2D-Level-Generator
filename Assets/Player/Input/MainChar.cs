@@ -174,6 +174,214 @@ public partial class @MainChar : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Screen"",
+            ""id"": ""cc4ad13c-abb1-4040-b4ea-59690d4857b5"",
+            ""actions"": [
+                {
+                    ""name"": ""Screen_Inv_1"",
+                    ""type"": ""Button"",
+                    ""id"": ""d51f1dc2-48b0-48bd-b95f-edcdd42948e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Screen_Inv_2"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f8137be-3e01-411f-99dc-be42779d6394"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Screen_Inv_3"",
+                    ""type"": ""Button"",
+                    ""id"": ""614c1e87-e937-4d4b-a466-a26f5429c013"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Screen_Inv_4"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8c664ad-0e86-444f-87e7-90bccc027295"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Screen_Inv_5"",
+                    ""type"": ""Button"",
+                    ""id"": ""7048b725-3b83-427d-9576-badae3ff1478"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Screen_Inv_6"",
+                    ""type"": ""Button"",
+                    ""id"": ""834ba343-89fe-4ea7-885a-b27ce9ec944f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Screen_Inv_7"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c0b2420-2ee4-45d9-91e4-a5c16f165f08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Screen_Inv_8"",
+                    ""type"": ""Button"",
+                    ""id"": ""51a99216-d8b1-4f27-9f14-525db43c1c90"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Screen_Inv_9"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab24560d-56ad-41b5-9a9c-b5c4bc17c984"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Screen_Inv_0"",
+                    ""type"": ""Button"",
+                    ""id"": ""0b2a1c8b-89c6-4d54-8ff4-9880d7739352"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""fd9e1988-3f92-40af-9c25-f8fbb2d8ef96"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screen_Inv_1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51b3ae2f-b89f-4fb3-9c95-36af13c34f4e"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screen_Inv_2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81a4b553-3a7d-4252-8c2b-c1b63f43791a"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screen_Inv_3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ad6d336-6c49-4ea9-a010-f67bf2a18e48"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screen_Inv_4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9474bf4-48ee-4653-8664-eb42d06cbd40"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screen_Inv_5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c6adac5-4eb8-4bd8-a02c-fff66d0ea252"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screen_Inv_6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""234d2f0d-0690-45fb-bd39-c3b8d337ce5b"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screen_Inv_7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6541560e-48f6-47a4-80fd-cd057ae230ec"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screen_Inv_8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1bf13bec-f0a5-4673-b67e-4b6970ad414a"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screen_Inv_9"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f77ba3c-8508-4a74-ab0c-75ff4464ed3d"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Screen_Inv_0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -185,6 +393,18 @@ public partial class @MainChar : IInputActionCollection2, IDisposable
         m_Game_Interact = m_Game.FindAction("Interact", throwIfNotFound: true);
         m_Game_MousePosition = m_Game.FindAction("MousePosition", throwIfNotFound: true);
         m_Game_MouseClick = m_Game.FindAction("MouseClick", throwIfNotFound: true);
+        // Screen
+        m_Screen = asset.FindActionMap("Screen", throwIfNotFound: true);
+        m_Screen_Screen_Inv_1 = m_Screen.FindAction("Screen_Inv_1", throwIfNotFound: true);
+        m_Screen_Screen_Inv_2 = m_Screen.FindAction("Screen_Inv_2", throwIfNotFound: true);
+        m_Screen_Screen_Inv_3 = m_Screen.FindAction("Screen_Inv_3", throwIfNotFound: true);
+        m_Screen_Screen_Inv_4 = m_Screen.FindAction("Screen_Inv_4", throwIfNotFound: true);
+        m_Screen_Screen_Inv_5 = m_Screen.FindAction("Screen_Inv_5", throwIfNotFound: true);
+        m_Screen_Screen_Inv_6 = m_Screen.FindAction("Screen_Inv_6", throwIfNotFound: true);
+        m_Screen_Screen_Inv_7 = m_Screen.FindAction("Screen_Inv_7", throwIfNotFound: true);
+        m_Screen_Screen_Inv_8 = m_Screen.FindAction("Screen_Inv_8", throwIfNotFound: true);
+        m_Screen_Screen_Inv_9 = m_Screen.FindAction("Screen_Inv_9", throwIfNotFound: true);
+        m_Screen_Screen_Inv_0 = m_Screen.FindAction("Screen_Inv_0", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -305,6 +525,111 @@ public partial class @MainChar : IInputActionCollection2, IDisposable
         }
     }
     public GameActions @Game => new GameActions(this);
+
+    // Screen
+    private readonly InputActionMap m_Screen;
+    private IScreenActions m_ScreenActionsCallbackInterface;
+    private readonly InputAction m_Screen_Screen_Inv_1;
+    private readonly InputAction m_Screen_Screen_Inv_2;
+    private readonly InputAction m_Screen_Screen_Inv_3;
+    private readonly InputAction m_Screen_Screen_Inv_4;
+    private readonly InputAction m_Screen_Screen_Inv_5;
+    private readonly InputAction m_Screen_Screen_Inv_6;
+    private readonly InputAction m_Screen_Screen_Inv_7;
+    private readonly InputAction m_Screen_Screen_Inv_8;
+    private readonly InputAction m_Screen_Screen_Inv_9;
+    private readonly InputAction m_Screen_Screen_Inv_0;
+    public struct ScreenActions
+    {
+        private @MainChar m_Wrapper;
+        public ScreenActions(@MainChar wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Screen_Inv_1 => m_Wrapper.m_Screen_Screen_Inv_1;
+        public InputAction @Screen_Inv_2 => m_Wrapper.m_Screen_Screen_Inv_2;
+        public InputAction @Screen_Inv_3 => m_Wrapper.m_Screen_Screen_Inv_3;
+        public InputAction @Screen_Inv_4 => m_Wrapper.m_Screen_Screen_Inv_4;
+        public InputAction @Screen_Inv_5 => m_Wrapper.m_Screen_Screen_Inv_5;
+        public InputAction @Screen_Inv_6 => m_Wrapper.m_Screen_Screen_Inv_6;
+        public InputAction @Screen_Inv_7 => m_Wrapper.m_Screen_Screen_Inv_7;
+        public InputAction @Screen_Inv_8 => m_Wrapper.m_Screen_Screen_Inv_8;
+        public InputAction @Screen_Inv_9 => m_Wrapper.m_Screen_Screen_Inv_9;
+        public InputAction @Screen_Inv_0 => m_Wrapper.m_Screen_Screen_Inv_0;
+        public InputActionMap Get() { return m_Wrapper.m_Screen; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ScreenActions set) { return set.Get(); }
+        public void SetCallbacks(IScreenActions instance)
+        {
+            if (m_Wrapper.m_ScreenActionsCallbackInterface != null)
+            {
+                @Screen_Inv_1.started -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_1;
+                @Screen_Inv_1.performed -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_1;
+                @Screen_Inv_1.canceled -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_1;
+                @Screen_Inv_2.started -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_2;
+                @Screen_Inv_2.performed -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_2;
+                @Screen_Inv_2.canceled -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_2;
+                @Screen_Inv_3.started -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_3;
+                @Screen_Inv_3.performed -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_3;
+                @Screen_Inv_3.canceled -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_3;
+                @Screen_Inv_4.started -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_4;
+                @Screen_Inv_4.performed -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_4;
+                @Screen_Inv_4.canceled -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_4;
+                @Screen_Inv_5.started -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_5;
+                @Screen_Inv_5.performed -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_5;
+                @Screen_Inv_5.canceled -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_5;
+                @Screen_Inv_6.started -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_6;
+                @Screen_Inv_6.performed -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_6;
+                @Screen_Inv_6.canceled -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_6;
+                @Screen_Inv_7.started -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_7;
+                @Screen_Inv_7.performed -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_7;
+                @Screen_Inv_7.canceled -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_7;
+                @Screen_Inv_8.started -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_8;
+                @Screen_Inv_8.performed -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_8;
+                @Screen_Inv_8.canceled -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_8;
+                @Screen_Inv_9.started -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_9;
+                @Screen_Inv_9.performed -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_9;
+                @Screen_Inv_9.canceled -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_9;
+                @Screen_Inv_0.started -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_0;
+                @Screen_Inv_0.performed -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_0;
+                @Screen_Inv_0.canceled -= m_Wrapper.m_ScreenActionsCallbackInterface.OnScreen_Inv_0;
+            }
+            m_Wrapper.m_ScreenActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Screen_Inv_1.started += instance.OnScreen_Inv_1;
+                @Screen_Inv_1.performed += instance.OnScreen_Inv_1;
+                @Screen_Inv_1.canceled += instance.OnScreen_Inv_1;
+                @Screen_Inv_2.started += instance.OnScreen_Inv_2;
+                @Screen_Inv_2.performed += instance.OnScreen_Inv_2;
+                @Screen_Inv_2.canceled += instance.OnScreen_Inv_2;
+                @Screen_Inv_3.started += instance.OnScreen_Inv_3;
+                @Screen_Inv_3.performed += instance.OnScreen_Inv_3;
+                @Screen_Inv_3.canceled += instance.OnScreen_Inv_3;
+                @Screen_Inv_4.started += instance.OnScreen_Inv_4;
+                @Screen_Inv_4.performed += instance.OnScreen_Inv_4;
+                @Screen_Inv_4.canceled += instance.OnScreen_Inv_4;
+                @Screen_Inv_5.started += instance.OnScreen_Inv_5;
+                @Screen_Inv_5.performed += instance.OnScreen_Inv_5;
+                @Screen_Inv_5.canceled += instance.OnScreen_Inv_5;
+                @Screen_Inv_6.started += instance.OnScreen_Inv_6;
+                @Screen_Inv_6.performed += instance.OnScreen_Inv_6;
+                @Screen_Inv_6.canceled += instance.OnScreen_Inv_6;
+                @Screen_Inv_7.started += instance.OnScreen_Inv_7;
+                @Screen_Inv_7.performed += instance.OnScreen_Inv_7;
+                @Screen_Inv_7.canceled += instance.OnScreen_Inv_7;
+                @Screen_Inv_8.started += instance.OnScreen_Inv_8;
+                @Screen_Inv_8.performed += instance.OnScreen_Inv_8;
+                @Screen_Inv_8.canceled += instance.OnScreen_Inv_8;
+                @Screen_Inv_9.started += instance.OnScreen_Inv_9;
+                @Screen_Inv_9.performed += instance.OnScreen_Inv_9;
+                @Screen_Inv_9.canceled += instance.OnScreen_Inv_9;
+                @Screen_Inv_0.started += instance.OnScreen_Inv_0;
+                @Screen_Inv_0.performed += instance.OnScreen_Inv_0;
+                @Screen_Inv_0.canceled += instance.OnScreen_Inv_0;
+            }
+        }
+    }
+    public ScreenActions @Screen => new ScreenActions(this);
     public interface IGameActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -312,5 +637,18 @@ public partial class @MainChar : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnMouseClick(InputAction.CallbackContext context);
+    }
+    public interface IScreenActions
+    {
+        void OnScreen_Inv_1(InputAction.CallbackContext context);
+        void OnScreen_Inv_2(InputAction.CallbackContext context);
+        void OnScreen_Inv_3(InputAction.CallbackContext context);
+        void OnScreen_Inv_4(InputAction.CallbackContext context);
+        void OnScreen_Inv_5(InputAction.CallbackContext context);
+        void OnScreen_Inv_6(InputAction.CallbackContext context);
+        void OnScreen_Inv_7(InputAction.CallbackContext context);
+        void OnScreen_Inv_8(InputAction.CallbackContext context);
+        void OnScreen_Inv_9(InputAction.CallbackContext context);
+        void OnScreen_Inv_0(InputAction.CallbackContext context);
     }
 }
