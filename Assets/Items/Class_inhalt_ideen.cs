@@ -18,12 +18,11 @@ public class Classinhaltideen : MonoBehaviour
 
 
     class Item
-	{
-		string name;
+	{			
 		string description;	    //flavour text oder item beschreibung was es macht
 		string owner;		    //charaktergebundene items vlt		
 
-		int maxStack;
+
 		int stackSize;
 		int damageValue;
 		int slot;		        //inventar slot oder spezifischer slot.
