@@ -27,7 +27,6 @@ public class MovementColliders
         }
         return false;
     }
-
     public bool GroundCheck(Transform transform, LayerMask layer)
     {
         hit = Physics2D.BoxCast(transform.position, Vector2.one * 0.8F, 0, transform.TransformDirection(Vector3.down), 0.1F, layer);
@@ -44,6 +43,7 @@ public class MovementColliders
             return false;
         }
     }
+
     public bool HeadCheck(Transform transform, LayerMask layer)
     {
         hit = Physics2D.BoxCast(transform.position, Vector2.one * 0.8F, 0, transform.TransformDirection(Vector3.up), 0.1F, layer);

@@ -59,59 +59,11 @@ public class characterController : MonoBehaviour
     void Update()
     {
         Vector3 mousePosi = Camera.main.ScreenToWorldPoint(mainInput.Game.MousePosition.ReadValue<Vector2>());
-        if (Vector3.Distance(this.transform.position, mousePosi) < 4)
-        {
-            if (!lineRenderer.enabled) { lineRenderer.enabled = true; }
-
-            Vector3Int Cell = Map.instance.tilemap.layoutGrid.WorldToCell(mousePosi);
-            Vector3 _cell = Map.instance.tilemap.GetCellCenterWorld(Cell);
-
-            lineRenderer.SetPosition(0, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F, 0));
-            lineRenderer.SetPosition(1, new Vector3(_cell.x + 0.5F, _cell.y + 0.5F, 0));
-            lineRenderer.SetPosition(2, new Vector3(_cell.x + 0.5F, _cell.y - 0.5F, 0));
-            lineRenderer.SetPosition(3, new Vector3(_cell.x - 0.5F, _cell.y - 0.5F, 0));
-            lineRenderer.SetPosition(4, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F, 0));
-            lineRenderer.SetPosition(5, new Vector3(_cell.x + 0.5F, _cell.y + 0.5F, 0));
-        }
-        else
-        {
-            if (lineRenderer.enabled) { lineRenderer.enabled = false; }
-        }
+        LeftMouseButton(mousePosi);
 
         #region Buttons
 
         InventoryButtons();
-        if (mainInput.Game.Interact.IsPressed() || (mainInput.Game.MouseClick.IsPressed() && weaponselected))
-        {
-            if (Vector3.Distance(this.transform.position, mousePosi) < 4)
-            {
-                Vector3Int selectedTilePosition = Map.instance.tilemap.WorldToCell(mousePosi);
-                TileBase b = Map.instance.tilemap.GetTile(selectedTilePosition);
-                for (int i = 0; i < tiles.Length; i++)
-                {
-                    if (tiles[i].tilebase != null && tiles[i].tilebase == b)
-                    {
-                        inventar.AddItem(tiles[i]);
-                    }
-                }
-                Map.instance.tilemap.SetTile(selectedTilePosition, null);
-            }
-        }
-        if (mainInput.Game.MouseClick.IsPressed())
-        {
-            if (mouseWasPressed == false)
-            {
-                mouseWasPressed = true;
-                StartCoroutine(CheckMouseClick());
-            }
-        }
-        else
-        {
-            if (mouseWasPressed == true)
-            {
-                mouseWasPressed = false;
-            }
-        }
         #endregion
 
         CameraController();
@@ -181,6 +133,108 @@ public class characterController : MonoBehaviour
         }
         transform.Translate(move * walkSpeed * Time.deltaTime);
     }
+
+    private void LeftMouseButton(Vector3 mousePosi)
+    {
+        if(inventar.items[inventar.GetSelectedItem()] == null)return; 
+
+        switch(inventar.items[inventar.GetSelectedItem()].itemEnums)
+        {
+            case ItemEnums.Weapon:
+                if (mainInput.Game.MouseClick.IsPressed())
+                {
+                    if (mouseWasPressed == false)
+                    {
+                        mouseWasPressed = true;
+                        StartCoroutine(CheckMouseClick());
+                    }
+                }
+                else
+                {
+                    if (mouseWasPressed == true)
+                    {
+                        mouseWasPressed = false;
+                    }
+                }
+            break;
+            case ItemEnums.Pickaxe:
+                if (Vector3.Distance(this.transform.position, mousePosi) < 4)
+                {
+                    if (!lineRenderer.enabled) { lineRenderer.enabled = true; }
+
+                    Vector3Int Cell = Map.instance.tilemap.layoutGrid.WorldToCell(mousePosi);
+                    Vector3 _cell = Map.instance.tilemap.GetCellCenterWorld(Cell);
+
+                    lineRenderer.SetPosition(0, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F, 0));
+                    lineRenderer.SetPosition(1, new Vector3(_cell.x + 0.5F, _cell.y + 0.5F, 0));
+                    lineRenderer.SetPosition(2, new Vector3(_cell.x + 0.5F, _cell.y - 0.5F, 0));
+                    lineRenderer.SetPosition(3, new Vector3(_cell.x - 0.5F, _cell.y - 0.5F, 0));
+                    lineRenderer.SetPosition(4, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F, 0));
+                    lineRenderer.SetPosition(5, new Vector3(_cell.x + 0.5F, _cell.y + 0.5F, 0));
+                }else{
+                    if (lineRenderer.enabled) { lineRenderer.enabled = false; }
+                }
+                if (mainInput.Game.Interact.IsPressed() || (mainInput.Game.MouseClick.IsPressed()))
+                {
+                    if (Vector3.Distance(this.transform.position, mousePosi) < 4)
+                    {
+                        Vector3Int selectedTilePosition = Map.instance.tilemap.WorldToCell(mousePosi);
+                        TileBase b = Map.instance.tilemap.GetTile(selectedTilePosition);
+                        for (int i = 0; i < tiles.Length; i++)
+                        {
+                            if (tiles[i].tilebase != null && tiles[i].tilebase == b)
+                            {
+                                inventar.AddItem(tiles[i]);
+                            }
+                        }
+                        Map.instance.tilemap.SetTile(selectedTilePosition, null);
+                    }
+                }
+            break;
+            case ItemEnums.Tile:
+                if (Vector3.Distance(this.transform.position, mousePosi) < 4)
+                {
+                    if (!lineRenderer.enabled) { lineRenderer.enabled = true; }
+
+                    Vector3Int Cell = Map.instance.tilemap.layoutGrid.WorldToCell(mousePosi);
+                    Vector3 _cell = Map.instance.tilemap.GetCellCenterWorld(Cell);
+
+                    lineRenderer.SetPosition(0, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F, 0));
+                    lineRenderer.SetPosition(1, new Vector3(_cell.x + 0.5F, _cell.y + 0.5F, 0));
+                    lineRenderer.SetPosition(2, new Vector3(_cell.x + 0.5F, _cell.y - 0.5F, 0));
+                    lineRenderer.SetPosition(3, new Vector3(_cell.x - 0.5F, _cell.y - 0.5F, 0));
+                    lineRenderer.SetPosition(4, new Vector3(_cell.x - 0.5F, _cell.y + 0.5F, 0));
+                    lineRenderer.SetPosition(5, new Vector3(_cell.x + 0.5F, _cell.y + 0.5F, 0));
+                }else{
+                    if (lineRenderer.enabled) { lineRenderer.enabled = false; }
+                }
+                if (mainInput.Game.Interact.IsPressed() || (mainInput.Game.MouseClick.IsPressed()))
+                {
+                    if (Vector3.Distance(this.transform.position, mousePosi) < 4)
+                    {
+                        Vector3Int selectedTilePosition = Map.instance.tilemap.WorldToCell(mousePosi);
+                        TileBase b = Map.instance.tilemap.GetTile(selectedTilePosition);
+                        for (int i = 0; i < tiles.Length; i++)
+                        {
+                            if (tiles[i].tilebase != null && tiles[i].tilebase == b)
+                            {
+                                inventar.AddItem(tiles[i]);
+                            }
+                        }
+                        Map.instance.tilemap.SetTile(selectedTilePosition, inventar.items[inventar.GetSelectedItem()].tileBases.tilebase);
+                    }
+                }
+            break;
+            default:
+                break;
+        }
+        if((inventar.items[inventar.GetSelectedItem()].itemEnums != ItemEnums.Pickaxe) &&
+            (inventar.items[inventar.GetSelectedItem()].itemEnums != ItemEnums.Tile))
+        {
+            if (lineRenderer.enabled) { lineRenderer.enabled = false; }
+        }
+    }
+
     IEnumerator CheckMouseClick()
     {
         while (mainInput.Game.MouseClick.IsPressed())

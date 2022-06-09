@@ -20,6 +20,7 @@ public class inventarScreen : MonoBehaviour
     }
     public void Select(int item)
     {
+        lastImageIndex = item;
         Images[item].color = new Color(1,1,1,1F);
     }
 }
