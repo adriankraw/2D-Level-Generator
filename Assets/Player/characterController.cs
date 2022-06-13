@@ -8,7 +8,9 @@ public class characterController : MonoBehaviour
     private Camera mainCam;
 
     [Header("Stats-Values")]
-    public bool isGround;
+    public bool isTouchingGround;
+    public bool isTouchingHead;
+    public bool isTouchingSide;
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] BoxCollider2D _collider2D;
     [SerializeField] inventar inventar;
@@ -76,21 +78,30 @@ public class characterController : MonoBehaviour
         space = mainInput.Game.Jump.ReadValue<float>();
 
         #region Colliders
-        if (movementColliders.CheckSides(move, transform, layermask))
+        isTouchingSide = movementColliders.CheckSides(move, transform, layermask);
+        isTouchingHead = movementColliders.HeadCheck(transform, layermask);
+        isTouchingGround = movementColliders.GroundCheck(transform, layermask);
+
+        if (isTouchingSide)
         {
             move.x = 0;
         }
-
-        isGround = movementColliders.GroundCheck(transform, layermask);
-        if (isGround)
+        if (isTouchingGround)
         {
-            move.y = space * jumpStrg;
-        }
-        else
-        {
-            if (movementColliders.HeadCheck(transform, layermask))
+            if (isTouchingHead)
             {
-                move.y = 0 - gravity * Time.deltaTime;
+                move.y = 0;
+            }
+            else
+            {
+                move.y = space * jumpStrg;
+            }
+        }
+        else 
+        {
+            if (isTouchingHead)
+            {
+                move.y = -1 - gravity * Time.deltaTime;
             }
             else
             {

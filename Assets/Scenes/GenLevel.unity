@@ -123,37 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &8129607
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8129608}
-  m_Layer: 8
-  m_Name: Boden
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8129608
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8129607}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.599, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 421730362}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &28153069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,7 +1936,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac57710e08dc8214da48668154bc2cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGround: 0
+  isTouchingGround: 0
+  isTouchingHead: 0
+  isTouchingSide: 0
   rigid: {fileID: 0}
   _collider2D: {fileID: 421730363}
   inventar:
@@ -1985,7 +1956,7 @@ MonoBehaviour:
   layermask:
     serializedVersion: 2
     m_Bits: 64
-  TileSelection: {fileID: 8129608}
+  TileSelection: {fileID: 0}
   tiles:
   - {fileID: 11400000, guid: fb009938b9cd2784fa4578f069a2a0d5, type: 2}
   - {fileID: 11400000, guid: 5db7fb2d6029c1a4b9d20b1dd72af946, type: 2}
@@ -2015,11 +1986,10 @@ Transform:
   m_GameObject: {fileID: 421730359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 194.21, y: 250.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1641446862}
-  - {fileID: 8129608}
   - {fileID: 853116980}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -3620,7 +3590,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 421730362}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 9.371, y: -14.606, z: -58}
 --- !u!120 &853116981
 LineRenderer:
@@ -6901,7 +6871,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641446861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.08, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
