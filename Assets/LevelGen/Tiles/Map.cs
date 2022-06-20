@@ -7,6 +7,7 @@ public class Map : MonoBehaviour
 {
     public TilemapCollider2D mapcollider;
     public Tilemap tilemap;
+    public LevelGenManager levelGenManager;
 
     public static Map instance;
 

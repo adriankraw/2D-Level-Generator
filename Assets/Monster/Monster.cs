@@ -4,57 +4,50 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    [SerializeField] int Health = 100;
-    [SerializeField] float gravity = 9.81F;
-    [SerializeField] float walkSpeed = 2;
-    [SerializeField] LayerMask moveLayerMask;
-    Vector3 move = new Vector3();
-    private RaycastHit2D hit;
-    [SerializeField] bool isGround = false;
-    [SerializeField] float fric = 5;
+    public int Health = 100;
+    public float gravity = 9.81F;
+    public float walkSpeed = 2;
+    public LayerMask moveLayerMask;
+    public bool isGround = false;
+    public float fric = 5;
 
     [Header("Rules")]
-    [SerializeField] float distanceToPlayer = 1.1F;
+    public float distanceToPlayer = 1.1F;
 
-    private MovementColliders movementColliders;
+    MonsterStateMachine stateMachine;
+    public float currentdistance;
+    public MovementColliders movementColliders;
 
     private void Awake()
     {
         movementColliders = new MovementColliders();
+        stateMachine = new MonsterStateMachine();
+        stateMachine.SetMonster(this);
+        stateMachine.ChangeState(MonsterState.wating);
     }
 
     private void Update()
     {
-        isGround = movementColliders.GroundCheck(transform,moveLayerMask);
-        if (!isGround)
+        currentdistance = this.transform.position.x - playerData.instance.GetPositionData().x;
+        if (currentdistance < 0) currentdistance *= -1;
+
+        if (currentdistance < 1F)
         {
-            move.y -= gravity * Time.deltaTime;
+            stateMachine.ChangeState(MonsterState.attacking);
         }
         else
+        if (currentdistance < 10F)
         {
-            move.y = 0;
-        }
-
-
-        float distance = this.transform.position.x - playerData.instance.GetPositionData().x;
-        if (Mathf.Abs(distance) > distanceToPlayer)
-        {
-            move.x = Mathf.Clamp(playerData.instance.GetPositionData().x - this.transform.position.x, -1F, 1F);
-            if (movementColliders.CheckSides(move, transform,moveLayerMask))
-            {
-                move.x = 0;
-                if (isGround)
-                {
-                    move.y = 6F;
-                }
-            }
+            stateMachine.ChangeState(MonsterState.following);
         }
         else
+        if (currentdistance < 25F)
         {
-            move.x = 0;
+            stateMachine.ChangeState(MonsterState.searching);
         }
-
-        move.z = 0;
-        transform.Translate(move * walkSpeed * Time.deltaTime);
+        else {
+            stateMachine.ChangeState(MonsterState.wating);
+        }
+        stateMachine.UpdateState();
     }
 }

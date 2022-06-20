@@ -23,6 +23,10 @@ public class LevelGenManager : MonoBehaviour
     int[,] map;
     public int state = 0;
 
+    public int[,] GetBaseMap()
+    {
+        return map;
+    }
     void Start()
     {
         map = new int[width, height];
