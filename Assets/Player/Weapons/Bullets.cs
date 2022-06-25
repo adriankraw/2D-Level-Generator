@@ -12,7 +12,12 @@ public class Bullets : MonoBehaviour
         if(other.tag == "Monster")
         {
             this.gameObject.SetActive(false);
-            other.gameObject.SetActive(false);
+            //other ist das Monster;
+            other.GetComponent<Monster>().TakeDamage(10);
+            if (other.GetComponent<Monster>().Health == 0)
+            {
+                other.gameObject.SetActive(false);
+            }
         }
         if(other.tag == "Terrain")
         {
