@@ -7,5 +7,5 @@ public enum MonsterState
     following = 0,
     searching = 1,
     attacking = 2,
-    wating = 3
+    waiting = 3
 }

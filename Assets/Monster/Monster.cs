@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    public float Health = 100;
+    public float Health = 100F;
     public float gravity = 9.81F;
     public float walkSpeed = 2;
     public LayerMask moveLayerMask;
@@ -18,7 +18,7 @@ public class Monster : MonoBehaviour
     public float currentdistance;
     public MovementColliders movementColliders;
 
-    private float maxHealth;
+    public float maxHealth = 100F;
 
     [SerializeField] PlayerHealth playerHealth;
 
@@ -27,15 +27,22 @@ public class Monster : MonoBehaviour
     {
         movementColliders = new MovementColliders();
         stateMachine = new MonsterStateMachine();
+        Health = 100F;
+        maxHealth = 100F;
         stateMachine.SetMonster(this);
-        maxHealth = Health;
-        stateMachine.ChangeState(MonsterState.wating);
+        stateMachine.ChangeState(MonsterState.waiting);
     }
     public void TakeDamage(int Value)
     {
-        Health -= Value;
-        if (Health < 0) { Health = 0; }
-        if (Health > maxHealth) { Health = maxHealth; }
+        this.Health = this.Health - Value;
+        if (this.Health < 0) 
+        {
+            this.gameObject.SetActive(false);
+        }
+        if (this.Health > this.maxHealth) 
+        { 
+            this.Health = this.maxHealth; 
+        }
         playerHealth.SetHealthBar(Health/maxHealth);
     }
 
@@ -59,8 +66,13 @@ public class Monster : MonoBehaviour
             stateMachine.ChangeState(MonsterState.searching);
         }
         else {
-            stateMachine.ChangeState(MonsterState.wating);
+            stateMachine.ChangeState(MonsterState.waiting);
         }
         stateMachine.UpdateState();
+    }
+    public void Reset()
+    {
+        Health = maxHealth;
+        playerHealth.SetHealthBar(Health / maxHealth);
     }
 }

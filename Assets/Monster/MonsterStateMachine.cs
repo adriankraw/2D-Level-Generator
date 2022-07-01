@@ -35,7 +35,7 @@ public class MonsterStateMachine
         }
         switch (currentState)
         {
-            case MonsterState.wating:
+            case MonsterState.waiting:
                 break;
             case MonsterState.searching:
                 startPosition = Map.instance.tilemap.layoutGrid.WorldToCell(currentMonster.transform.position);

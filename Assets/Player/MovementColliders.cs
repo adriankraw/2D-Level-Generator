@@ -46,9 +46,9 @@ public class MovementColliders
         hit = Physics2D.BoxCast(new Vector3(transform.position.x, transform.position.y-0.1F, transform.position.z), new Vector2(0.4F, 0.4F), 0, transform.TransformDirection(Vector3.down), 0.1F, layer);
         if (hit)
         {
-            if (Vector3.Distance(hit.point, transform.position) < 0.3F)
+            if (Vector3.Distance(hit.point, transform.position) < 0.38F)
             {
-                transform.Translate(new Vector3(0, 0.1F, 0));
+                transform.Translate(new Vector3(0, 0.2F, 0));
             }
             return true;
         }

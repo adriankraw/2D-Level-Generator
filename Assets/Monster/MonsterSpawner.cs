@@ -32,6 +32,7 @@ public class MonsterSpawner : MonoBehaviour
                     if(!monsterPool.monsters[i].activeSelf)
                     {
                         monsterPool.monsters[i].SetActive(true);
+                        monsterPool.monsters[i].GetComponent<Monster>().Reset();
                         monsterPool.monsters[i].transform.position = this.transform.position;
                         break;
                     }
