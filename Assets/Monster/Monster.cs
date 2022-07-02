@@ -20,6 +20,9 @@ public class Monster : MonoBehaviour
 
     public float maxHealth = 100F;
 
+    private float attackSpeed = 0;
+    public bool IsAttacking = true;
+
     [SerializeField] PlayerHealth playerHealth;
 
 
@@ -54,6 +57,7 @@ public class Monster : MonoBehaviour
 
         if (currentdistance < 1F)
         {
+            CheckForIsAttacking();
             stateMachine.ChangeState(MonsterState.attacking);
         }
         else
@@ -66,14 +70,34 @@ public class Monster : MonoBehaviour
         {
             stateMachine.ChangeState(MonsterState.searching);
         }
-        else {
+        else
+        {
             stateMachine.ChangeState(MonsterState.waiting);
         }
         stateMachine.UpdateState();
     }
+
+    private void CheckForIsAttacking()
+    {
+        if (attackSpeed > 1)
+        {
+            IsAttacking = true;
+            attackSpeed = 0;
+        }
+        else
+        {
+            IsAttacking = false;
+            attackSpeed += Time.deltaTime;
+        }
+    }
+
     public void Reset()
     {
         Health = maxHealth;
         playerHealth.SetHealthBar(Health / maxHealth);
+    }
+    public float GetDamage()
+    {
+        return 10F;
     }
 }

@@ -80,6 +80,12 @@ public class MonsterStateMachine
                 move.z = 0;
                 break;
             case MonsterState.attacking:
+
+                if (currentMonster.IsAttacking)
+                {
+                    playerData.instance.TakeDamage(this.currentMonster.GetDamage());
+                }
+
                 break;
             default:
                 break;
