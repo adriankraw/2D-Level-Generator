@@ -22,6 +22,7 @@ public class Monster : MonoBehaviour
 
     private float attackSpeed = 0;
     public bool IsAttacking = true;
+    public AnimationCurve deathAnimation;
 
     [SerializeField] PlayerHealth playerHealth;
 
@@ -40,7 +41,7 @@ public class Monster : MonoBehaviour
         this.Health = this.Health - Value;
         if (this.Health < 0) 
         {
-            this.gameObject.SetActive(false);
+            StartCoroutine(deathAnimationCo());
         }
         if (this.Health > this.maxHealth) 
         { 
@@ -49,7 +50,20 @@ public class Monster : MonoBehaviour
         playerHealth.SetHealthBar(Health/maxHealth);
         this.transform.position = this.transform.position + move / 20;
     }
-
+    IEnumerator deathAnimationCo()
+    {
+        float timing = 0.2F;
+        Vector3 scale = this.transform.localScale;
+        while (timing > 0)
+        {
+            timing -= Time.deltaTime;
+            this.transform.localScale = scale * deathAnimation.Evaluate(timing);
+            yield return null;
+        }
+        this.gameObject.SetActive(false);
+        yield return null;
+        this.transform.localScale = scale;
+    }
     private void Update()
     {
         currentdistance = this.transform.position.x - playerData.instance.GetPositionData().x;

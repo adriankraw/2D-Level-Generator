@@ -223,12 +223,73 @@ MonoBehaviour:
   walkSpeed: 4
   moveLayerMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 16449
   isGround: 0
   fric: 5
   distanceToPlayer: 0.9
   currentdistance: 0
   maxHealth: 0
+  IsAttacking: 1
+  deathAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.012503
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.08328044
+      value: 1.9742371
+      inSlope: 18.75
+      outSlope: 18.75
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.46153846
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.11635961
+      value: 1.4107336
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.15032431
+      value: 1.629078
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2722364
+      value: 0.60232913
+      inSlope: -2.1193793
+      outSlope: -2.1193793
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.34077078
+      value: -0.0025420417
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   playerHealth: {fileID: 2071285581}
 --- !u!212 &21415915
 SpriteRenderer:
@@ -1419,12 +1480,73 @@ MonoBehaviour:
   walkSpeed: 4
   moveLayerMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 16449
   isGround: 0
   fric: 5
   distanceToPlayer: 0.9
   currentdistance: 0
   maxHealth: 0
+  IsAttacking: 1
+  deathAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.012503
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.08328044
+      value: 1.9742371
+      inSlope: 18.75
+      outSlope: 18.75
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.46153846
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.11635961
+      value: 1.4107336
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.15032431
+      value: 1.629078
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2722364
+      value: 0.60232913
+      inSlope: -2.1193793
+      outSlope: -2.1193793
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.34077078
+      value: -0.0025420417
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   playerHealth: {fileID: 756583546}
 --- !u!212 &210860963
 SpriteRenderer:
@@ -2699,12 +2821,73 @@ MonoBehaviour:
   walkSpeed: 4
   moveLayerMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 16449
   isGround: 0
   fric: 5
   distanceToPlayer: 0.9
   currentdistance: 0
   maxHealth: 0
+  IsAttacking: 1
+  deathAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.012503
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.08328044
+      value: 1.9742371
+      inSlope: 18.75
+      outSlope: 18.75
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.46153846
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.11635961
+      value: 1.4107336
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.15032431
+      value: 1.629078
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2722364
+      value: 0.60232913
+      inSlope: -2.1193793
+      outSlope: -2.1193793
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.34077078
+      value: -0.0025420417
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   playerHealth: {fileID: 1663608621}
 --- !u!212 &369054363
 SpriteRenderer:
@@ -3227,12 +3410,73 @@ MonoBehaviour:
   walkSpeed: 4
   moveLayerMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 16449
   isGround: 0
   fric: 5
   distanceToPlayer: 0.9
   currentdistance: 0
   maxHealth: 0
+  IsAttacking: 1
+  deathAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.012503
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.08328044
+      value: 1.9742371
+      inSlope: 18.75
+      outSlope: 18.75
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.46153846
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.11635961
+      value: 1.4107336
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.15032431
+      value: 1.629078
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2722364
+      value: 0.60232913
+      inSlope: -2.1193793
+      outSlope: -2.1193793
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.34077078
+      value: -0.0025420417
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   playerHealth: {fileID: 647423583}
 --- !u!212 &380245959
 SpriteRenderer:
@@ -7559,12 +7803,73 @@ MonoBehaviour:
   walkSpeed: 4
   moveLayerMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 16449
   isGround: 0
   fric: 5
   distanceToPlayer: 0.9
   currentdistance: 0
   maxHealth: 0
+  IsAttacking: 1
+  deathAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.012503
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.08328044
+      value: 1.9742371
+      inSlope: 18.75
+      outSlope: 18.75
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.46153846
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.11635961
+      value: 1.4107336
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.15032431
+      value: 1.629078
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2722364
+      value: 0.60232913
+      inSlope: -2.1193793
+      outSlope: -2.1193793
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.34077078
+      value: -0.0025420417
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   playerHealth: {fileID: 547374002}
 --- !u!212 &930405080
 SpriteRenderer:
@@ -9112,12 +9417,73 @@ MonoBehaviour:
   walkSpeed: 4
   moveLayerMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 16449
   isGround: 0
   fric: 5
   distanceToPlayer: 0.9
   currentdistance: 0
   maxHealth: 0
+  IsAttacking: 1
+  deathAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.012503
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.08328044
+      value: 1.9742371
+      inSlope: 18.75
+      outSlope: 18.75
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.46153846
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.11635961
+      value: 1.4107336
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.15032431
+      value: 1.629078
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2722364
+      value: 0.60232913
+      inSlope: -2.1193793
+      outSlope: -2.1193793
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.34077078
+      value: -0.0025420417
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   playerHealth: {fileID: 418189739}
 --- !u!212 &1185282244
 SpriteRenderer:
@@ -13890,12 +14256,73 @@ MonoBehaviour:
   walkSpeed: 4
   moveLayerMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 16449
   isGround: 0
   fric: 5
   distanceToPlayer: 0.9
   currentdistance: 0
   maxHealth: 0
+  IsAttacking: 1
+  deathAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.00625
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.045550227
+      value: 1.9625945
+      inSlope: 14.499967
+      outSlope: 14.499967
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.6214012
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.11807968
+      value: 0.60156614
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.16880324
+      value: 1.7484013
+      inSlope: 50.249928
+      outSlope: 50.249928
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3999998
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.24101031
+      value: 0.77926683
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.26705685
+      value: 0.022698402
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   playerHealth: {fileID: 651223220}
 --- !u!61 &1873813331
 BoxCollider2D:
