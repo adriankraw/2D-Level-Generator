@@ -32,7 +32,7 @@ public class Monster : MonoBehaviour
         stateMachine.SetMonster(this);
         stateMachine.ChangeState(MonsterState.waiting);
     }
-    public void TakeDamage(int Value)
+    public void TakeDamage(int Value, Vector3 move)
     {
         this.Health = this.Health - Value;
         if (this.Health < 0) 
@@ -44,6 +44,7 @@ public class Monster : MonoBehaviour
             this.Health = this.maxHealth; 
         }
         playerHealth.SetHealthBar(Health/maxHealth);
+        this.transform.position = this.transform.position + move / 20;
     }
 
     private void Update()
