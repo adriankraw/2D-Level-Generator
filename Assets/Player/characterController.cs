@@ -273,10 +273,13 @@ public class characterController : MonoBehaviour
         Vector3 CurrentResolition = new Vector3(Screen.width, Screen.height, 0);
         float cameraSpeed = 1F;
 
-        if ((playerPosition.x < CurrentResolition.x *2/5 || playerPosition.x > CurrentResolition.x *3/5)
-            || (playerPosition.y < CurrentResolition.y *2/5 || playerPosition.y > CurrentResolition.y *3/5))
+        if ((playerPosition.x < CurrentResolition.x * 2 / 5 || playerPosition.x > CurrentResolition.x * 3 / 5)
+            || (playerPosition.y < CurrentResolition.y * 2 / 5 || playerPosition.y > CurrentResolition.y * 3 / 5))
         {
-            mainCam.transform.position = Camera.main.ScreenToWorldPoint(new Vector2( Earp(CurrentResolition.x/2, playerPosition.x, cameraSpeed * Time.deltaTime), Earp(CurrentResolition.y / 2, playerPosition.y, cameraSpeed * Time.deltaTime)));
+            mainCam.transform.position = Camera.main.ScreenToWorldPoint(new Vector2(Earp(CurrentResolition.x / 2, playerPosition.x, cameraSpeed * Time.deltaTime), Earp(CurrentResolition.y / 2, playerPosition.y, cameraSpeed * Time.deltaTime)));
+        }
+        else {
+            mainCam.transform.position = Camera.main.ScreenToWorldPoint(new Vector2(Earp(CurrentResolition.x / 2, playerPosition.x, 0.05F * Time.deltaTime), Earp(CurrentResolition.y / 2, playerPosition.y, cameraSpeed * Time.deltaTime)));
         }
 
     }
