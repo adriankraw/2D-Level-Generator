@@ -32,9 +32,15 @@ public class Bullets : MonoBehaviour
             aliveForSeconds+= Time.fixedDeltaTime;
         }
     }
-    public void reset() {
+    public void reset()
+    {
         move = Vector3.zero;
         aliveForSeconds = 0;
         this.gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        this.transform.position = Vector3.zero;
     }
 }

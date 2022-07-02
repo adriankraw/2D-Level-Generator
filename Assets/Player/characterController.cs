@@ -40,6 +40,7 @@ public class characterController : MonoBehaviour
     private bool mouseWasPressed;
 
     private bool weaponselected = false;
+    Coroutine weaponAttack;
 
     private void Awake()
     {
@@ -157,11 +158,15 @@ public class characterController : MonoBehaviour
                     if (mouseWasPressed == false)
                     {
                         mouseWasPressed = true;
-                        StartCoroutine(CheckMouseClick());
+                        if (weaponAttack == null)
+                        {
+                            weaponAttack = StartCoroutine(CheckMouseClick());
+                        }
                     }
                 }
                 else
                 {
+                    weaponAttack = null;
                     if (mouseWasPressed == true)
                     {
                         mouseWasPressed = false;
@@ -264,8 +269,24 @@ public class characterController : MonoBehaviour
 
     private void CameraController()
     {
-        mainCam.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 0);
+        Vector3 playerPosition = Camera.main.WorldToScreenPoint(this.transform.position);
+        Vector3 CurrentResolition = new Vector3(Screen.width, Screen.height, 0);
+        float cameraSpeed = 1F;
+
+        if ((playerPosition.x < CurrentResolition.x *2/5 || playerPosition.x > CurrentResolition.x *3/5)
+            || (playerPosition.y < CurrentResolition.y *2/5 || playerPosition.y > CurrentResolition.y *3/5))
+        {
+            mainCam.transform.position = Camera.main.ScreenToWorldPoint(new Vector2( Earp(CurrentResolition.x/2, playerPosition.x, cameraSpeed * Time.deltaTime), Earp(CurrentResolition.y / 2, playerPosition.y, cameraSpeed * Time.deltaTime)));
+        }
+
     }
+
+    public float Earp(float a, float b, float t)
+    {
+        a = a * (Mathf.Pow((b / a),t));
+        return a;
+    }
+
 
     private void InventoryButtons()
     {
