@@ -5,15 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-   
+
+    public LevelLoader LevelTransition;
+
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        LevelTransition.LoadNextLevel();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+      
 
     public void Quitgame()
     {
         Application.Quit();
-
     }
 }
