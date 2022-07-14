@@ -35,12 +35,21 @@ public class Bullets : MonoBehaviour
     public void reset()
     {
         move = Vector3.zero;
+        this.transform.position = playerData.instance.GetPositionData();
         aliveForSeconds = 0;
+        this.GetComponent<TrailRenderer>().Clear();
+        this.GetComponent<TrailRenderer>().enabled = false;
         this.gameObject.SetActive(false);
     }
 
     private void OnDisable()
     {
         this.transform.position = Vector3.zero;
+        this.GetComponent<TrailRenderer>().enabled = false;
+
+    }
+    private void OnEnable()
+    {
+        this.GetComponent<TrailRenderer>().enabled = true;
     }
 }
