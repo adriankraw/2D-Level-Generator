@@ -23,6 +23,7 @@ public class Monster : MonoBehaviour
     private float attackSpeed = 0;
     public bool IsAttacking = true;
     public AnimationCurve deathAnimation;
+    private Vector3 scale;
 
     [SerializeField] PlayerHealth playerHealth;
 
@@ -33,6 +34,7 @@ public class Monster : MonoBehaviour
         stateMachine = new MonsterStateMachine();
         Health = 100F;
         maxHealth = 100F;
+        this.scale = this.transform.localScale;
         stateMachine.SetMonster(this);
         stateMachine.ChangeState(MonsterState.waiting);
     }
@@ -108,6 +110,7 @@ public class Monster : MonoBehaviour
     public void Reset()
     {
         Health = maxHealth;
+        this.transform.localScale = this.scale;
         playerHealth.SetHealthBar(Health / maxHealth);
     }
     public float GetDamage()
